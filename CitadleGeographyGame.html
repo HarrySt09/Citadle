@@ -26,6 +26,16 @@
     --radius: 10px;
     --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Compass panel uses a dark "night sky" surface regardless of theme,
+       so these tokens are fixed rather than swapped in dark mode. */
+    --compass-bg: #14131b;
+    --compass-ring: rgba(255, 255, 255, 0.12);
+    --compass-spoke: rgba(255, 255, 255, 0.22);
+    --compass-tick-text: rgba(255, 255, 255, 0.55);
+    --compass-label-text: #f3f1ea;
+    --compass-arrow: #ffffff;
+    --compass-center: #ffffff;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -53,9 +63,7 @@
 
   * { box-sizing: border-box; }
 
-  html, body {
-    height: 100%;
-  }
+  html, body { height: 100%; }
 
   body {
     margin: 0;
@@ -67,10 +75,12 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 24px 16px;
+    padding: 40px 16px 64px;
   }
 
-  .wrap { width: 100%; max-width: 950px; }
+  .wrap { width: 100%; max-width: 960px; }
+
+  /* ---------- Header ---------- */
 
   header {
     display: flex;
@@ -80,20 +90,21 @@
   }
 
   h1 {
-    font-size: 45px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 700;
     margin: 0;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     cursor: pointer;
   }
 
   .subtitle {
-    font-size: 15px;
+    font-size: 14.5px;
     color: var(--text-secondary);
-    margin: 2px 0 24px;
+    margin: 4px 0 28px;
   }
 
   /* ---------- Menu screen ---------- */
+
   .menu-screen { display: flex; flex-direction: column; gap: 14px; }
 
   .menu-card {
@@ -117,10 +128,10 @@
     margin-bottom: 6px;
   }
 
-  .menu-card-title { font-size: 18px; font-weight: 600; }
+  .menu-card-title { font-size: 17px; font-weight: 600; }
 
   .menu-card-badge {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     padding: 3px 9px;
     border-radius: 999px;
@@ -130,61 +141,17 @@
     letter-spacing: 0.03em;
   }
 
-  .menu-card-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.5; }
+  .menu-card-desc { font-size: 14.5px; color: var(--text-secondary); line-height: 1.5; }
 
   .menu-card.daily-card { border-color: var(--accent); }
 
   .menu-section-label {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin: 8px 0 -2px 4px;
-  }
-
-  .ring {
-    stroke: rgba(255,255,255,0.12);
-    fill: none;
-  }
-
-  .compass-dir-text {
-    fill: rgba(255,255,255,0.6);
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .center-dot {
-    fill: white;
-  }
-
-  .clue-line {
-    stroke: var(--accent);
-    stroke-width: 2;
-    opacity: 0.9;
-  }
-
-  .clue-label {
-    fill: var(--text-primary);
-    font-size: 10.5px;
-    opacity: 0.95;
-  }
-
-  .clue-line {
-    stroke: white;
-    stroke-width: 2.2;
-    fill: none;
-    stroke-linecap: round;
-
-    stroke-dasharray: 600;
-    stroke-dashoffset: 600;
-    animation: drawLine 0.6s ease forwards;
-  }
-
-  @keyframes drawLine {
-    to {
-      stroke-dashoffset: 0;
-    }
   }
 
   .freeplay-row {
@@ -193,37 +160,34 @@
     gap: 10px;
   }
 
-  .freeplay-row .menu-card { padding: 16px 14px; text-align: center; }
-  .freeplay-row .menu-card-title { font-size: 14.5px; }
+  .freeplay-row .menu-card { padding: 18px 14px; text-align: center; }
+  .freeplay-row .menu-card-title { font-size: 15px; }
 
-  .diff-icon { font-size: 20px; margin-bottom: 6px; }
+  .diff-icon { font-size: 22px; margin-bottom: 6px; }
 
-  .diff-detail { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .diff-detail { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
 
-  .daily-status { font-size: 15px; color: var(--text-muted); margin-top: 6px; }
+  .daily-status { font-size: 13.5px; color: var(--text-muted); margin-top: 8px; }
 
   /* ---------- Game screen ---------- */
 
-  .game-screen {
-    width: 100%;
-  }
   .game-screen { display: none; }
 
   .top-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     gap: 12px;
     flex-wrap: wrap;
   }
 
   .status-group { display: flex; align-items: center; gap: 10px; }
 
-  .status { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+  .status { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
 
   .mode-pill {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     padding: 3px 9px;
     border-radius: 999px;
@@ -238,7 +202,7 @@
 
   .back-btn {
     font-family: var(--font);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
     background: none;
@@ -249,57 +213,129 @@
 
   .back-btn:hover { color: var(--text-primary); }
 
-  .progress-track {
-    height: 5px;
-    background: var(--surface-soft);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 22px;
+  /* Discrete 8-segment progress indicator, one pip per available clue */
+
+  .progress-steps {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+    margin-bottom: 24px;
   }
 
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 6px;
-    transition: width .35s ease;
-    width: 0%;
+  .progress-step {
+    height: 6px;
+    border-radius: 4px;
+    background: var(--surface-soft);
+    border: 0.5px solid var(--border);
+    transition: background .25s, border-color .25s;
   }
+
+  .progress-step.filled {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ---------- Two-panel game layout ---------- */
+
+  .game-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .left-panel { flex: 1.5; }
+  .right-panel { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+  @media (max-width: 720px) {
+    .game-layout { flex-direction: column; }
+  }
+
+  /* ---------- Compass ---------- */
 
   .compass-card {
     position: relative;
-    background: var(--surface);
-    border: 0.5px solid var(--border);
+    background: var(--compass-bg);
     border-radius: 16px;
     padding: 16px;
     margin-bottom: 16px;
     box-shadow: var(--shadow);
   }
 
-  .compass-svg { width: 100%; height: auto; display: block; }
+  .compass-svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+  .ring { stroke: var(--compass-ring); fill: none; }
+
+  .compass-dir-text {
+    fill: var(--compass-tick-text);
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .center-dot { fill: var(--compass-center); }
+
+  .clue-line {
+    stroke: var(--compass-arrow);
+    stroke-width: 3;
+    stroke-linecap: round;
+    fill: none;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: drawClueLine 0.5s ease forwards;
+  }
+
+  @keyframes drawClueLine {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .clue-label {
+    fill: var(--compass-label-text);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  /* ---------- Clue chips ---------- */
 
   .clue-chip-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
 
   .clue-chip {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius);
     padding: 9px 12px;
-    font-size: 16px;
+    font-size: 14.5px;
   }
 
-  .clue-chip .flag { font-size: 20px; }
-  .clue-chip .arrow { color: var(--accent); font-weight: 700; width: 16px; text-align: center; white-space: nowrap; }
+  .clue-chip .flag { font-size: 18px; flex-shrink: 0; }
   .clue-chip .city-name { font-weight: 600; }
-  .clue-chip .extra { color: var(--text-muted); margin-left: auto; text-align: right; font-size: 12px; white-space: nowrap; }
+  .clue-chip .is-text { color: var(--text-secondary); }
+
+  .clue-chip .arrow {
+    color: var(--accent-text);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .clue-chip .extra {
+    margin-left: auto;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* ---------- Input + suggestions ---------- */
 
   .input-row { position: relative; margin-bottom: 10px; }
 
   input#guess-input {
     width: 100%;
-    font-size: 17px;
+    font-size: 16px;
     padding: 12px 14px;
     border-radius: var(--radius);
     border: 1px solid var(--border-strong);
@@ -342,11 +378,13 @@
   .suggestion-item:hover,
   .suggestion-item.highlighted { background: var(--surface-soft); }
 
+  /* ---------- Buttons ---------- */
+
   .button-row { display: flex; gap: 8px; margin-bottom: 12px; }
 
   button.btn {
     font-family: var(--font);
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 500;
     padding: 11px 16px;
     border-radius: var(--radius);
@@ -367,6 +405,8 @@
   .message.wrong { color: var(--danger); }
   .message.hint { color: var(--text-secondary); }
 
+  /* ---------- End screen ---------- */
+
   .end-screen {
     display: none;
     text-align: center;
@@ -375,11 +415,12 @@
     border-radius: 16px;
     padding: 28px 20px;
     box-shadow: var(--shadow);
+    margin-top: 18px;
   }
 
-  .end-icon { font-size: 34px; margin-bottom: 10px; }
-  .end-title { font-size: 19px; font-weight: 600; margin-bottom: 4px; }
-  .end-subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 18px; }
+  .end-icon { font-size: 36px; margin-bottom: 10px; }
+  .end-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .end-subtitle { font-size: 14.5px; color: var(--text-secondary); margin-bottom: 18px; }
 
   .guessed-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 18px; }
 
@@ -394,53 +435,29 @@
 
   .end-buttons { display: flex; gap: 8px; }
 
-  footer { text-align: center; margin-top: 28px; font-size: 12px; color: var(--text-muted); }
+  .share-row { display: none; margin-top: 10px; }
 
-  body {
-  color: var(--text-primary);
-}
-
-.message {
-  color: var(--text-primary);
-}
-
-input, button {
-  color: var(--text-primary);
-}
-
-svg text {
-  fill: var(--text-primary);
-}
-
-.game-layout {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  width: 100%;
-}
-
-/* LEFT: compass */
-.left-panel {
-  flex: 1.6;
-}
-
-/* RIGHT: controls */
-.right-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-@media (max-width: 700px) {
-  .game-layout {
-    flex-direction: column;
+  button.btn-share {
+    width: 100%;
+    background: var(--success-soft);
+    border-color: var(--success-soft);
+    color: var(--success);
+    font-weight: 600;
   }
-}
 
+  button.btn-share:hover { background: var(--success); color: white; }
+
+  footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
+
   <header>
     <h1 id="title-link">Citadle</h1>
   </header>
@@ -455,7 +472,7 @@ svg text {
         <div class="menu-card-title">Daily Challenge</div>
         <div class="menu-card-badge">Medium</div>
       </div>
-      <div class="menu-card-desc">One secret city. Flags shown, no distances.</div>
+      <div class="menu-card-desc">One secret city, the same for everyone today. Flags shown, no distances.</div>
       <div class="daily-status" id="daily-status"></div>
     </div>
 
@@ -464,23 +481,24 @@ svg text {
       <div class="menu-card" data-level="easy">
         <div class="diff-icon">🟢</div>
         <div class="menu-card-title">Easy</div>
-        <div class="diff-detail">Flags & Distance</div>
+        <div class="diff-detail">Flags &amp; distance</div>
       </div>
       <div class="menu-card" data-level="medium">
         <div class="diff-icon">🟡</div>
         <div class="menu-card-title">Medium</div>
-        <div class="diff-detail">Flags</div>
+        <div class="diff-detail">Flags only</div>
       </div>
       <div class="menu-card" data-level="hard">
         <div class="diff-icon">🔴</div>
         <div class="menu-card-title">Hard</div>
-        <div class="diff-detail">City Name</div>
+        <div class="diff-detail">City name only</div>
       </div>
     </div>
   </div>
 
   <!-- ===================== GAME SCREEN ===================== -->
   <div class="game-screen" id="game-screen">
+
     <div class="top-row">
       <div class="status-group">
         <span class="status" id="status-line">Clue 1 of 8</span>
@@ -489,57 +507,35 @@ svg text {
       <button class="back-btn" id="back-btn">&larr; Menu</button>
     </div>
 
-    <div class="progress-track">
-      <div class="progress-fill" id="progress-fill"></div>
-    </div>
-
-    <!-- <div class="compass-card">
-      <svg id="compass-svg" class="compass-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
-
-    <div class="clue-chip-list" id="clue-chip-list"></div>
-
-    <div class="input-row">
-      <input id="guess-input" type="text" placeholder="Type a city name…" autocomplete="off" spellcheck="false">
-      <div class="suggestions" id="suggestions"></div>
-    </div>
-
-    <div class="button-row">
-      <button class="btn btn-primary" id="submit-btn">Guess</button>
-      <button class="btn" id="giveup-btn">Give up</button>
-    </div>
-
-    <div class="message" id="message"></div> -->
+    <div class="progress-steps" id="progress-steps"></div>
 
     <div class="game-layout">
 
-  <!-- LEFT SIDE (COMPASS) -->
-  <div class="left-panel">
-    <div class="compass-card">
-      <svg id="compass-svg" class="compass-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
+      <!-- Compass -->
+      <div class="left-panel">
+        <div class="compass-card">
+          <svg id="compass-svg" class="compass-svg" viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="right-panel">
+        <div class="clue-chip-list" id="clue-chip-list"></div>
+
+        <div class="input-row">
+          <input id="guess-input" type="text" placeholder="Type a city name…" autocomplete="off" spellcheck="false">
+          <div class="suggestions" id="suggestions"></div>
+        </div>
+
+        <div class="button-row" id="button-row">
+          <button class="btn btn-primary" id="submit-btn">Guess</button>
+          <button class="btn" id="giveup-btn">Give up</button>
+        </div>
+
+        <div class="message" id="message"></div>
+      </div>
+
     </div>
-  </div>
-
-  <!-- RIGHT SIDE (CONTROLS) -->
-  <div class="right-panel">
-
-    <div class="clue-chip-list" id="clue-chip-list"></div>
-
-    <div class="input-row">
-      <input id="guess-input" type="text" placeholder="Type a city name…" autocomplete="off" spellcheck="false">
-      <div class="suggestions" id="suggestions"></div>
-    </div>
-
-    <div class="button-row">
-      <button class="btn btn-primary" id="submit-btn">Guess</button>
-      <button class="btn" id="giveup-btn">Give up</button>
-    </div>
-
-    <div class="message" id="message"></div>
-
-  </div>
-
-</div>
 
     <div class="end-screen" id="end-screen">
       <div class="end-icon" id="end-icon">📍</div>
@@ -550,7 +546,11 @@ svg text {
         <button class="btn" id="menu-btn" style="flex:1;">Menu</button>
         <button class="btn btn-primary" id="play-again-btn" style="flex:1;">Play again</button>
       </div>
+      <div class="share-row" id="share-row">
+        <button class="btn btn-share" id="share-btn">Share result</button>
+      </div>
     </div>
+
   </div>
 
   <footer>Directions are calculated using real great-circle bearings between city coordinates.</footer>
@@ -560,4 +560,3 @@ svg text {
 <script src="CitadleGame.js"></script>
 </body>
 </html>
-

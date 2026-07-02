@@ -340,7 +340,29 @@ function buildClue(city) {
 // (which then becomes the clue city); if null, draw from the pool.
 function revealNextClue(sourceCity = null) {
   app.round += 1;
-  const clueCity = sourceCity || cityByName[app.pool[app.round - 1]];
+  //const clueCity = sourceCity || cityByName[app.pool[app.round - 1]];
+
+let clueCity;
+
+  if (sourceCity) {
+    clueCity = sourceCity;
+  } else {
+    if (app.difficulty === "hard") {
+      // HARD MODE: pick random city from pool each time
+      const randomIndex = Math.floor(Math.random() * app.pool.length);
+      clueCity = cityByName[app.pool[randomIndex]];
+
+      // remove it so it can't appear again
+      app.pool.splice(randomIndex, 1);
+    } else {
+      // normal behaviour (sequential pool)
+      clueCity = cityByName[app.pool[app.round - 1]];
+    }
+  }
+
+  const clue = buildClue(clueCity);
+  clue.id = app.round;
+
   app.clues.push(buildClue(clueCity));
   app.clueNames.push(clueCity.name); // record for accurate daily replay
 
@@ -637,7 +659,11 @@ function handleGuess(raw) {
   guessInput.value = "";
 
   if (app.round >= MAX_CLUES) { endGame(false); return; }
-  revealNextClue(guessedCity);
+  if (app.difficulty === "hard") {
+    revealNextClue(null);
+  } else {
+    revealNextClue(guessedCity);
+}
 }
 
 /* =================== End game =================== */
